@@ -8,5 +8,6 @@
             	Create
             </a>
         </div>
+        {!! $dataGrid->render() !!}
     </div>
 @stop

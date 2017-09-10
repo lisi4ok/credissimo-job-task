@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\CategoryRequest;
 use App\Models\Category;
+use App\Framework\DataGrid\Facades\DataGrid;
 
 class CategoryController extends Controller
 {
@@ -19,7 +20,25 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        return view('category.index');
+        $dataGrid = DataGrid::model(Category::query())
+                        ->column('name',['label' => 'Name','sortable' => true])
+                        ->column('slug',['sortable' => true])
+                        ->linkColumn('edit',[], function($model) {
+                            return "<a href='". route('category.edit', $model->id)."' >Edit</a>";
+
+                        })->linkColumn('destroy',[], function($model) {
+                            return "<form id='admin-category-destroy-".$model->id."'
+                                            method='POST'
+                                            action='".route('category.destroy', $model->id) ."'>
+                                        <input name='_method' type='hidden' value='DELETE' />
+                                        ". csrf_field()."
+                                        <a href='#'
+                                            onclick=\"jQuery('#admin-category-destroy-$model->id').submit()\"
+                                            >Destroy</a>
+                                    </form>";
+                        });
+
+        return view('category.index')->with('dataGrid', $dataGrid);
     }
 
 

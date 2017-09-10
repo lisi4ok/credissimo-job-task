@@ -9,7 +9,7 @@
                 <div class="card-header">Create Category</div>
                 <div class="card-body">
 
-                    {!! Form::open(['method' => 'post', 'action' => 'CategoryController@store']) !!}
+                    {!! Form::open(['method' => 'post', 'action' => route('category.store')]) !!}
 
                         @include('category._fields')
                         {!! Form::submit('Create Category',['disabled' => true, 'class' => 'btn category-save-button']) !!}

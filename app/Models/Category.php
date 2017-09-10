@@ -4,10 +4,8 @@ namespace App\Models;
 
 use App\Models\Product;
 use Illuminate\Support\Collection;
-use Illuminate\Database\Eloquent\Model;
 use App\Models\ProductVarcharValue;
 use App\Models\Attribute;
-
 
 class Category extends Model
 {

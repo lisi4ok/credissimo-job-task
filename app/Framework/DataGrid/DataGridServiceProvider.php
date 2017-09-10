@@ -22,7 +22,6 @@ class DataGridServiceProvider extends ServiceProvider {
     public function register() {
 
         $this->registerDataGrid();
-        $this->registerViewPath();
         $this->app->alias('datagrid', 'App\Framework\DataGrid\DataGridManager');
     }
 
