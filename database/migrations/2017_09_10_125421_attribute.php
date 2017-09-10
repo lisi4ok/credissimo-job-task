@@ -19,8 +19,8 @@ class Attribute extends Migration
                 $table->string('name');
                 $table->string('identifier')->unique();
                 $table->enum('field_type', [
-                    'TEXT', 'TEXTAREA', 'CKEDITOR',
-                    'SELECT', 'FILE', 'DATETIME','CHECKBOX','RADIO',
+                    'STRING', 'TEXT', 'SELECT',
+                    'FILE', 'DATETIME','CHECKBOX','RADIO',
                 ]);
                 $table->integer('sort_order')->nullable()->default(0);
                 $table->timestamps();
@@ -61,8 +61,10 @@ class Attribute extends Migration
      */
     public function down()
     {
+        DB::statement('SET FOREIGN_KEY_CHECKS=0;');
         Schema::drop('attributes');
         Schema::drop('attribute_dropdown_options');
         Schema::drop('product_attribute_values');
+        DB::statement('SET FOREIGN_KEY_CHECKS=1;');
     }
 }

@@ -8,6 +8,11 @@ use App\Framework\DataGrid\Facades\DataGrid;
 
 class AttributeController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
     public function getDataGrid()
     {
         return $users = DataGrid::dataTableData(Attribute::query())->get();
