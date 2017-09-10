@@ -40,6 +40,7 @@
                             <li><a href="{{ route('home') }}">Category</a></li>
                         @else
                             <li><a href="{{ route('category.index') }}">Categories</a></li>
+                            <li><a href="{{ route('attribute.index') }}">Attributes</a></li>
                         @endif
                     </ul>
 

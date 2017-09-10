@@ -20,6 +20,12 @@ Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
 
 Route::resource('/category', 'CategoryController');
+Route::resource('/attribute', 'AttributeController');
+Route::post('product-attribute-panel', [
+	'as' => 'product-attribute.get-attribute',
+	'uses' => 'AttributeController@getAttribute',
+]);
+//Route::resource('/product', 'ProductController');
 // Route::get('/category/{slug}', [
 //     'as' => 'category.view', 'uses' => 'CategoryViewController@view',
 // ]);

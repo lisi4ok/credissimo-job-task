@@ -3,21 +3,15 @@
 @section('content')
 
     <div class="row">
-        <div class="col-12">
-            <div class="card">
-                <div class="card-header">Edit Category</div>
-                <div class="card-body">
+        <div class="col-8">
+            <h1>Edit Category</h1>
+            {!! Form::bind($category , ['method' => 'put', 'action' => route('category.update', $category->id)]) !!}
 
-                    {!! Form::bind($category , ['method' => 'put', 'action' => route('category.update', $category->id)]) !!}
+            @include('category._fields')
 
-                    @include('category._fields')
-
-                    {!! Form::submit('Edit Category', ['disabled' => true, 'class' => 'btn category-save-button']) !!}
-                    <a href="{{ route('category.index') }}" class="btn btn-default">Cancel</a>
-                    {!! Form::close() !!}
-
-                </div>
-            </div>
+            {!! Form::submit('Edit Category', ['disabled' => true, 'class' => 'btn category-save-button']) !!}
+            <a href="{{ route('category.index') }}" class="btn btn-default">Cancel</a>
+            {!! Form::close() !!}
         </div>
     </div>
 
