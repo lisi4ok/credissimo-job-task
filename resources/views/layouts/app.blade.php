@@ -36,7 +36,11 @@
                 <div class="collapse navbar-collapse" id="app-navbar-collapse">
                     <!-- Left Side Of Navbar -->
                     <ul class="nav navbar-nav">
-                        &nbsp;
+                        @if (Auth::guest())
+                            <li><a href="{{ route('home') }}">Category</a></li>
+                        @else
+                            <li><a href="{{ route('category.index') }}">Categories</a></li>
+                        @endif
                     </ul>
 
                     <!-- Right Side Of Navbar -->
@@ -71,7 +75,11 @@
             </div>
         </nav>
 
-        @yield('content')
+        <div class="container">
+            <div class="col-12">
+                @yield('content')
+            </div>
+        </div>
     </div>
 
     <!-- Scripts -->

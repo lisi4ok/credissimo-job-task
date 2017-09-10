@@ -1,9 +1,7 @@
 
 {!! Form::text('name','Category Name') !!}
 {!! Form::text('slug','Category Slug') !!}
-@if (0)
 {!! Form::select('parent_id','Parent Category', $categoryOptions) !!}
-@endif
 
 @push('scripts')
 <script>

@@ -177,6 +177,15 @@ return [
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
 
+        Collective\Html\HtmlServiceProvider::class,
+
+        /*
+         * Application Framework Service Providers...
+         */
+        App\Framework\Attribute\AttributeServiceProvider::class,
+        App\Framework\DataGrid\DataGridServiceProvider::class,
+        App\Framework\Form\FormServiceProvider::class,
+        App\Framework\Image\ImageServiceProvider::class,
     ],
 
     /*
@@ -225,6 +234,14 @@ return [
         'URL' => Illuminate\Support\Facades\URL::class,
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
+
+        /*
+         * Application Framework Facades...
+         */
+        'Attributes' => App\Framework\Attribute\Facades\Attributes::class,
+        'DataGrid' => App\Framework\DataGrid\Facades\DataGrid::class,
+        'Form' => App\Framework\Form\Facades\FormFacade::class,
+        'Image' => App\Framework\Image\Facades\Image::class,
 
     ],
 
