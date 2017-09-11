@@ -5,7 +5,7 @@
         <div class="h1">
             Categories
             <a style="" href="{{ route('category.create') }}" class="btn btn-primary float-right">
-            	Create
+            	Create Category
             </a>
         </div>
         {!! $dataGrid->render() !!}

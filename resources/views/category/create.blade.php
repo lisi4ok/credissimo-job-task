@@ -3,7 +3,7 @@
 @section('content')
 
     <div class="row">
-        <div class="col-8">
+        <div class="col-md-8">
         <h1>Create Category</h1>
             {!! Form::open(['method' => 'post', 'action' => route('category.store')]) !!}
 

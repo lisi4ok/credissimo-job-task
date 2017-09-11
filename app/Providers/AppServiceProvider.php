@@ -4,6 +4,8 @@ namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\View;
+use App\ViewComposers\CategoryFieldsComposer;
+use App\ViewComposers\ProductFieldsComposer;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -16,7 +18,11 @@ class AppServiceProvider extends ServiceProvider
     {
         View::composer(
             ['category._fields'],
-            'App\ViewComposers\CategoryFieldsComposer'
+            CategoryFieldsComposer::class
+        );
+        View::composer(
+            ['product._fields'],
+            ProductFieldsComposer::class
         );
     }
 

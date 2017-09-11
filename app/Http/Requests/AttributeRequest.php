@@ -3,7 +3,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest as Request;
 
-class CategoryRequest extends Request
+class AttributeRequest extends Request
 {
     /**
      * Determine if the user is authorized to make this request.
