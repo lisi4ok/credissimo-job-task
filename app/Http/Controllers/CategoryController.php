@@ -2,15 +2,18 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Http\Request;
 use App\Http\Requests\CategoryRequest;
 use App\Models\Category;
+use App\Models\Product;
 use App\Framework\DataGrid\Facades\DataGrid;
 
 class CategoryController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('auth');
+        $this->middleware('auth')->except('show');
+        $this->middleware('guest')->only('show');
     }
 
     /**
@@ -96,6 +99,22 @@ class CategoryController extends Controller
         return redirect()->route('category.index');
     }
 
+    /**
+     * Display the specified resource.
+     *
+     * @param int $id
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function show(Request $request, $slug)
+    {
+        $category = Category::where('slug', '=', $slug)->get()->first();
+
+        echo '<pre>';
+        var_dump($category);
+        exit;
+
+    }
     /**
      * Remove the specified resource from storage.
      *

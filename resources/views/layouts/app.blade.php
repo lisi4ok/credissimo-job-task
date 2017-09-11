@@ -12,6 +12,17 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/css/select2.min.css">
+    @if (0)
+        <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+        <link href="//fonts.googleapis.com/css?family=Raleway:300,400,600" rel="stylesheet" type="text/css">
+
+        <!--[if lt IE 9]>
+          <script src="//oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+          <script src="//oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+        <![endif]-->
+        <link href="css/style.css" rel="stylesheet">
+    @endif
 </head>
 <body>
     <div id="app">
@@ -37,7 +48,19 @@
                     <!-- Left Side Of Navbar -->
                     <ul class="nav navbar-nav">
                         @if (Auth::guest())
-                            <li><a href="{{ route('home') }}">Category</a></li>
+                            @php
+                            /**
+                             * @todo  List Childs
+                             */
+                            $categories = \App\Models\Category::where('parent_id', null)->get();
+                            @endphp
+                            @foreach ($categories as $category)
+                                <li>
+                                    <a href="{{ route('category.show', $category->slug) }}">
+                                        {{ $category->name }}
+                                    </a>
+                                </li>
+                            @endforeach
                         @else
                             <li><a href="{{ route('category.index') }}">Categories</a></li>
                             <li><a href="{{ route('product.index') }}">Products</a></li>
@@ -85,7 +108,12 @@
     </div>
 
     <!-- Scripts -->
-    <script src="{{ asset('js/app.js') }}"></script>
+    @if (0)
+        <script src="{{ asset('js/app.js') }}"></script>
+    @endif
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/js/select2.full.js"></script>
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
     @stack('scripts')
 </body>
 </html>

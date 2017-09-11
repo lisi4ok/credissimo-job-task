@@ -2,7 +2,7 @@
 
 namespace App\Models;
 
-use Mage2\Framework\Image\LocalImageFile;
+use App\Framework\Image\LocalImageFile;
 
 class ProductImage extends Model
 {
