@@ -15,7 +15,8 @@ class ProductController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('auth');
+        $this->middleware('auth')->except('show');
+        $this->middleware('guest')->only('show');
     }
     /**
      * Display a listing of the resource.
@@ -78,13 +79,14 @@ class ProductController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param int $id
+     * @param sting $slug
      *
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($slug)
     {
-        //
+        $product = Product::where('slug', '=', $slug)->get()->first();
+        return view('product.show')->with('product', $product);
     }
 
     /**

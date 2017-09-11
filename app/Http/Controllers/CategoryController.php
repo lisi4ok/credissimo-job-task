@@ -109,11 +109,14 @@ class CategoryController extends Controller
     public function show(Request $request, $slug)
     {
         $category = Category::where('slug', '=', $slug)->get()->first();
+        $collection = Product::getCollection()
+            ->addCategoryFilter($category->id);
 
-        echo '<pre>';
-        var_dump($category);
-        exit;
-
+        $products = $collection->paginateCollection(10);
+        return view('category.show')
+            ->with('category', $category)
+            ->with('params', $request->all())
+            ->with('products', $products);
     }
     /**
      * Remove the specified resource from storage.

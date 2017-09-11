@@ -20,10 +20,6 @@ Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
 
 Route::resource('/category', 'CategoryController');
-// Route::get('/category/{slug}', [
-//     'as' => 'category.view',
-//     'uses' => 'CategoryViewController@view',
-// ]);
 
 Route::resource('/product', 'ProductController');
 Route::post('/product-image/upload', [
@@ -32,9 +28,6 @@ Route::post('/product-image/upload', [
 Route::post('/product-image/delete', [
     'as' => 'product.delete-image', 'uses' => 'ProductController@deleteImage',
 ]);
-// Route::get('/product/{slug}', [
-//  'as' => 'product.view', 'uses' => 'ProductViewController@view',
-// ]);
 
 
 Route::resource('/attribute', 'AttributeController');
