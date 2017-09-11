@@ -4,8 +4,11 @@ namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\View;
+use Illuminate\Support\Facades\Event;
 use App\ViewComposers\CategoryFieldsComposer;
 use App\ViewComposers\ProductFieldsComposer;
+use App\Events\ProductSavedEvent;
+use App\Listeners\ProductCategorySavingListener;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -23,6 +26,11 @@ class AppServiceProvider extends ServiceProvider
         View::composer(
             ['product._fields'],
             ProductFieldsComposer::class
+        );
+
+        Event::listen(
+            ProductSavedEvent::class,
+            ProductCategorySavingListener::class
         );
     }
 

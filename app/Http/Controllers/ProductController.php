@@ -2,27 +2,21 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Facades\Event;
+use Illuminate\Support\Facades\File;
 use Illuminate\Http\Request;
+use App\Framework\DataGrid\Facades\DataGrid;
+use App\Framework\Image\Facades\Image;
 use App\Http\Requests\ProductRequest;
 use App\Models\Product;
-use App\Framework\Image\Facades\Image;
-use Illuminate\Support\Facades\File;
-use App\Framework\DataGrid\Facades\DataGrid;
-//use Mage2\Product\Helpers\ProductHelper;
-//use Mage2\Product\Events\ProductSavedEvent;
+use App\Events\ProductSavedEvent;
 
 class ProductController extends Controller
 {
-    // /**
-    //  * @var \Mage2\Product\Helpers\ProductHelper
-    //  */
-    // protected $productHelper;
-
-    // public function __construct(ProductHelper $productHelper)
-    // {
-    //     $this->productHelper = $productHelper;
-    // }
-
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
     /**
      * Display a listing of the resource.
      * r.
@@ -69,10 +63,11 @@ class ProductController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(ProductRequest $request)
     {
         try {
             $product = Product::create($request->all());
+            Event::fire(new ProductSavedEvent($product, $request));
         } catch (\Exception $e) {
             echo 'Error in Saving Product: ', $e->getMessage(), "\n";
         }
@@ -119,7 +114,7 @@ class ProductController extends Controller
         try {
             $product = Product::findorfail($id);
             $product->update($request->all());
-            //Event::fire(new ProductSavedEvent($product, $request));
+            Event::fire(new ProductSavedEvent($product, $request));
         } catch (\Exception $e) {
             throw new \Exception('Error in Saving Product: ' . $e->getMessage());
         }
