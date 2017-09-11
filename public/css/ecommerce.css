@@ -557,3 +557,6 @@ xcredits
     background-color: #ef4554 !important;
     border: 1px solid #ef4554 !important;
 }
+.label-default {
+    background-color: #5fbeaa;
+}
