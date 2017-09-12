@@ -28,10 +28,10 @@
                             <button type="button"
                                     class="btn is_main_image_button {{ $class }} selected-icon btn-xs btn-default"
                                     title="Select as Main Image">
-                                <i class="glyphicon glyphicon-ok"></i>
+                                <i class="fa fa-check"></i>
                             </button>
                             <button type="button" class="destroy-image btn btn-xs btn-default" title="Remove file">
-                                <i class="glyphicon glyphicon-trash text-danger"></i>
+                                <i class="fa fa-trash-o text-danger"></i>
                             </button>
                         </div>
                     </div>
