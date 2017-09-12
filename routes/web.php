@@ -31,3 +31,7 @@ Route::post('/product-image/delete', [
 
 
 Route::resource('/attribute', 'AttributeController');
+Route::post('product-attribute-panel', [
+    'as' => 'product-attribute.get-attribute',
+    'uses' => 'AttributeController@getAttribute',
+]);

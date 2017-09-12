@@ -9,7 +9,6 @@ use App\ViewComposers\CategoryFieldsComposer;
 use App\ViewComposers\ProductFieldsComposer;
 use App\Events\ProductSavedEvent;
 use App\Listeners\ProductCategorySavingListener;
-use App\Listeners\ProductSavingListener;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -32,10 +31,6 @@ class AppServiceProvider extends ServiceProvider
         Event::listen(
             ProductSavedEvent::class,
             ProductCategorySavingListener::class
-        );
-        Event::listen(
-            ProductSavedEvent::class,
-            ProductSavingListener::class
         );
     }
 

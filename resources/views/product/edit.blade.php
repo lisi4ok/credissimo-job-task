@@ -11,8 +11,6 @@
                 ->get()->pluck('id')->toArray();
             @endphp
             @include('product._fields')
-            <hr />
-            @include('product.images')
             {!! Form::submit('Edit Product') !!}
             {!! Form::button('Cancel',['class' => 'btn', 'onclick' => 'location="'.route('product.index').'"']) !!}
 
