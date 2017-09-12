@@ -19,7 +19,9 @@
 
 {!! Form::text('price','Price') !!}
 
-{!! Form::textarea('description', 'Description',['class' => 'ckeditor']) !!}
+{!! Form::textarea('description', 'Description',[
+    'class' => 'ckeditor', 'style' => 'width: 1147px; height: 259px; margin: 0px;'
+]) !!}
 
 @push('scripts')
 <script>

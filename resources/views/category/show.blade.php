@@ -9,17 +9,14 @@
             @foreach($products as $product)
             <li>
                 <a href="{{ route('product.show', $product->slug) }}">
-                    <ul class="cd-item-wrapper">
-                        <li class="selected">
-                            <img src="assets/images/shop/ugmonk-tshirt-1.jpg" alt="Preview image">
-                        </li>
-                        <li class="move-right" data-sale="true" data-price="$22">
-                            <img src="assets/images/shop/ugmonk-tshirt-2.jpg" alt="Preview image">
-                        </li>
-                        <li>
-                            <img src="assets/images/shop/ugmonk-tshirt-3.jpg" alt="Preview image">
-                        </li>
-                    </ul>
+                    @foreach ($product->images as $image)
+                    @if ($image->is_main_image)
+                        <img src="{!! $image->path->smallUrl !!}" alt="Preview image">
+                        @php
+                            break;
+                        @endphp
+                    @endif
+                    @endforeach
                 </a>
                 <div class="cd-item-info">
                     <b><a href="{{ route('product.show', $product->slug) }}">{{ $product->name }}</a></b>

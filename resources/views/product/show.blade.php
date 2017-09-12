@@ -5,10 +5,14 @@
 	<div class="card-box product-detail-box">
 	   <div class="row">
 	       <div class="col-sm-4">
-	           <div class="sp-wrap">
-	               <a href="assets/images/products/big/1.jpg">
-	               <img src="assets/images/products/big/1.jpg" alt=""></a>
-	           </div>
+                @foreach ($product->images as $image)
+                @if ($image->is_main_image)
+                    <img src="{!! $image->path->medUrl !!}" alt="Preview image">
+                    @php
+                        break;
+                    @endphp
+                @endif
+                @endforeach
 	       </div>
 	       <div class="col-sm-8">
 	           <div class="product-right-info">
