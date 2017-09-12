@@ -14,10 +14,9 @@
 Route::get('/', function () {
     return view('welcome');
 });
+Route::get('/home', 'HomeController@index')->name('home');
 
 Auth::routes();
-
-Route::get('/home', 'HomeController@index')->name('home');
 
 Route::resource('/category', 'CategoryController');
 
@@ -29,9 +28,4 @@ Route::post('/product-image/delete', [
     'as' => 'product.delete-image', 'uses' => 'ProductController@deleteImage',
 ]);
 
-
 Route::resource('/attribute', 'AttributeController');
-Route::post('product-attribute-panel', [
-    'as' => 'product-attribute.get-attribute',
-    'uses' => 'AttributeController@getAttribute',
-]);
