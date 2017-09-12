@@ -1,15 +1,14 @@
 <?php
-
 namespace App\Listeners;
 
 use App\Models\ProductImage;
+use App\Models\Product;
 
 class ProductSavingListener
 {
     /**
      * Handle the event.
      *
-     * @param $event
      * @return void
      */
     public function handle($event)

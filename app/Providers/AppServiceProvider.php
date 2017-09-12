@@ -33,7 +33,6 @@ class AppServiceProvider extends ServiceProvider
             ProductSavedEvent::class,
             ProductCategorySavingListener::class
         );
-
         Event::listen(
             ProductSavedEvent::class,
             ProductSavingListener::class
