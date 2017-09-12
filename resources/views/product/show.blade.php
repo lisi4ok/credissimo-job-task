@@ -12,11 +12,11 @@
 	       </div>
 	       <div class="col-sm-8">
 	           <div class="product-right-info">
-	               <h1><b>{{ $product->name }}</b></h1>
-	               <h3>
+	               <h3><b>{{ $product->name }}</b></h3>
+	               <h2>
 	                   <b>$ {{ number_format($product->price, 2, '.', '') }}</b>
 	                   <small class="text-muted m-l-10"><del>$62</del> </small>
-	               </h3>
+	               </h2>
 	               <span class="label label-default m-l-5">In Stock</span>
 	               <hr/>
 	               <h5 class="font-600">Product Description</h5>
