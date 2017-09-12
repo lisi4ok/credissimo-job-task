@@ -8,6 +8,8 @@
             {!! Form::open(['files' => true,'action' => route('product.store'),'method' => 'post','id' => 'product-save-form']) !!}
 
             @include('product._fields')
+            <hr />
+            @include('product.images')
             {!! Form::submit('Create Product') !!}
             {!! Form::button('Cancel',['class' => 'btn', 'onclick' => 'location="'.route('product.index').'"']) !!}
 
