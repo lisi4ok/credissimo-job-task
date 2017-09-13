@@ -12,4 +12,7 @@ class Attribute extends Model
         return $this->hasMany(AttributeDropdownOption::class);
     }
 
+    public function productAttributeValues() {
+        return $this->hasMany(ProductAttributeValue::class);
+    }
 }

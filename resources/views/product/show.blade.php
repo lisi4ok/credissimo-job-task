@@ -42,78 +42,14 @@
 	           <div class="table-responsive m-t-20">
 	               <table class="table">
 	                   <tbody>
+	                   @foreach ($attributes as $attribute)
 	                       <tr>
-	                           <td width="400">Brand</td>
+	                           <td width="400">{{ $attribute->name }}</td>
 	                           <td>
-	                               TheBrandStore
+	                               {{ $attribute->value }}
 	                           </td>
 	                       </tr>
-	                       <tr>
-	                           <td>Color</td>
-	                           <td>
-	                               Black
-	                           </td>
-	                       </tr>
-	                       <tr>
-	                           <td>Length</td>
-	                           <td>
-	                               9 Centimeters
-	                           </td>
-	                       </tr>
-	                       <tr>
-	                           <td>Width</td>
-	                           <td>
-	                               20 Centimeters
-	                           </td>
-	                       </tr>
-	                       <tr>
-	                           <td>Height</td>
-	                           <td>
-	                               13 Centimeters
-	                           </td>
-	                       </tr>
-	                       <tr>
-	                           <td>Weight</td>
-	                           <td>
-	                               400 Grams
-	                           </td>
-	                       </tr>
-	                       <tr>
-	                           <td>Item part number:</td>
-	                           <td>
-	                               ABC2016
-	                           </td>
-	                       </tr>
-	                       <tr>
-	                           <td>Design</td>
-	                           <td>
-	                               Over-the-head
-	                           </td>
-	                       </tr>
-	                       <tr>
-	                           <td>Head Support</td>
-	                           <td>
-	                               No
-	                           </td>
-	                       </tr>
-	                       <tr>
-	                           <td width="400">Brand</td>
-	                           <td>
-	                               TheBrandStore
-	                           </td>
-	                       </tr>
-	                       <tr>
-	                           <td>Color</td>
-	                           <td>
-	                               Black
-	                           </td>
-	                       </tr>
-	                       <tr>
-	                           <td>Length</td>
-	                           <td>
-	                               9 Centimeters
-	                           </td>
-	                       </tr>
+	                   @endforeach
 	                   </tbody>
 	               </table>
 	           </div>

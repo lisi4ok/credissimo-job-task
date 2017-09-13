@@ -76,6 +76,10 @@ class Product extends Model
         return $this->hasMany(ProductImage::class);
     }
 
+    public function productAttributeValues() {
+        return $this->hasMany(ProductAttributeValue::class);
+    }
+
     /**
      * return default Image or LocalImageFile Object
      *
