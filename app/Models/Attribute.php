@@ -8,11 +8,13 @@ class Attribute extends Model
         'field_type', 'sort_order',
     ];
 
-    public function attributeDropdownOptions() {
+    public function attributeDropdownOptions()
+    {
         return $this->hasMany(AttributeDropdownOption::class);
     }
 
-    public function productAttributeValues() {
+    public function productAttributeValues()
+    {
         return $this->hasMany(ProductAttributeValue::class);
     }
 }

@@ -35,18 +35,17 @@
 	       </div>
 	   </div>
 	   <!-- end row -->
-
 	   <div class="row m-t-30">
 	       <div class="col-xs-12">
 	           <h4><b>Specifications:</b></h4>
 	           <div class="table-responsive m-t-20">
 	               <table class="table">
 	                   <tbody>
-	                   @foreach ($attributes as $attribute)
+	                   @foreach ($product->productAttributeValues as $productAttributeValue)
 	                       <tr>
-	                           <td width="400">{{ $attribute->name }}</td>
+	                           <td width="400">{{ $productAttributeValue->attribute->name }}</td>
 	                           <td>
-	                               {{ $attribute->value }}
+	                               {{ $productAttributeValue->value }}
 	                           </td>
 	                       </tr>
 	                   @endforeach
@@ -55,7 +54,6 @@
 	           </div>
 	       </div>
 	   </div>
-
 
 	</div> <!-- end card-box/Product detai box -->
 	</div> <!-- end col -->
