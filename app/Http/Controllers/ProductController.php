@@ -9,8 +9,6 @@ use App\Framework\DataGrid\Facades\DataGrid;
 use App\Framework\Image\Facades\Image;
 use App\Http\Requests\ProductRequest;
 use App\Models\Product;
-use App\Models\ProductAttributeValue;
-use App\Models\Attribute;
 use App\Events\ProductSavedEvent;
 
 class ProductController extends Controller
@@ -56,8 +54,7 @@ class ProductController extends Controller
      */
     public function create()
     {
-        $attirbutes = Attribute::where('field_type', 'TEXT')->get();
-        return view('product.create')->with('attirbutes', $attirbutes);
+        return view('product.create');
     }
 
     /**
@@ -71,23 +68,6 @@ class ProductController extends Controller
     {
         try {
             $product = Product::create($request->all());
-
-            $rq = $request->all();
-            $attirbutes = Attribute::where('field_type', 'TEXT')->get();
-            $attributesToSave = [];
-            foreach ($attirbutes as $attirbute) {
-                if (array_key_exists($attirbute->identifier, $rq)) {
-                    $attributesToSave[$attirbute->id] = $rq[$attirbute->identifier];
-                }
-            }
-            foreach ($attributesToSave as $attrid => $value) {
-                \DB::table('product_attribute_values')->insert([
-                    'attribute_id' => $attrid,
-                    'value' => $value,
-                    'product_id' => $product->id,
-                ]);
-            }
-
             Event::fire(new ProductSavedEvent($product, $request));
         } catch (\Exception $e) {
             echo 'Error in Saving Product: ', $e->getMessage(), "\n";
@@ -106,18 +86,7 @@ class ProductController extends Controller
     public function show($slug)
     {
         $product = Product::where('slug', '=', $slug)->get()->first();
-        $attributes = \DB::table('attributes')
-            ->leftJoin(
-                'product_attribute_values',
-                'product_attribute_values.attribute_id',
-                '=', 'attributes.id'
-            )
-            ->where('product_attribute_values.product_id', $product->id)
-            ->get();
-
-        return view('product.show')
-        ->with('attributes', $attributes)
-        ->with('product', $product);
+        return view('product.show')->with('product', $product);
     }
 
     /**
@@ -129,18 +98,8 @@ class ProductController extends Controller
      */
     public function edit($id)
     {
-        $attributes = \DB::table('attributes')
-            ->leftJoin(
-                'product_attribute_values',
-                'product_attribute_values.attribute_id',
-                '=', 'attributes.id'
-            )
-            ->where('product_attribute_values.product_id', $id)
-            ->get();
         $product = Product::findorfail($id);
-        return view('product.edit')
-            ->with('product', $product)
-            ->with('attributes', $attributes);
+        return view('product.edit')->with('product', $product);
 
     }
 
@@ -157,33 +116,6 @@ class ProductController extends Controller
         try {
             $product = Product::findorfail($id);
             $product->update($request->all());
-
-            $rq = $request->all();
-            $attirbutes = Attribute::where('field_type', 'TEXT')->get();
-            $attributesToSave = [];
-            foreach ($attirbutes as $attirbute) {
-                if (array_key_exists($attirbute->identifier, $rq)) {
-                    $attributesToSave[$attirbute->id] = $rq[$attirbute->identifier];
-                }
-            }
-            foreach ($attributesToSave as $attrid => $value) {
-                $hasAttrVal = DB::table('product_attribute_values')
-                    ->where('product_id', $product->id)
-                    ->where('attribute_id', $attrid)
-                    ->get();
-                if($hasAttrVal) {
-                    \DB::table('product_attribute_values')
-                        ->where('product_id', $product->id)
-                        ->where('attribute_id', $attrid)
-                        ->update(['value' => $value]);
-                } else {
-                    \DB::table('product_attribute_values')->insert([
-                        'attribute_id' => $attrid,
-                        'value' => $value,
-                        'product_id' => $id,
-                    ]);
-                }
-            }
 
             Event::fire(new ProductSavedEvent($product, $request));
         } catch (\Exception $e) {

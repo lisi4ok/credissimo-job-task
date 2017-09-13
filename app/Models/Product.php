@@ -5,11 +5,6 @@ namespace App\Models;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Str;
 use App\Framework\Image\LocalImageFile;
-use App\Models\Category;
-use App\Models\ProductCollection;
-use App\Models\ProductImage;
-//use App\Models\ProductAttribute;
-//use App\Models\ProductPrice;
 
 class Product extends Model
 {
@@ -76,7 +71,8 @@ class Product extends Model
         return $this->hasMany(ProductImage::class);
     }
 
-    public function productAttributeValues() {
+    public function productAttributeValues()
+    {
         return $this->hasMany(ProductAttributeValue::class);
     }
 

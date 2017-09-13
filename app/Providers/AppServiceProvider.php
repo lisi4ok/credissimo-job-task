@@ -7,8 +7,10 @@ use Illuminate\Support\Facades\View;
 use Illuminate\Support\Facades\Event;
 use App\ViewComposers\CategoryFieldsComposer;
 use App\ViewComposers\ProductFieldsComposer;
+use App\ViewComposers\ProductAttributesComposer;
 use App\Events\ProductSavedEvent;
 use App\Listeners\ProductCategorySavingListener;
+use App\Listeners\ProductAttributeSavingListener;
 use App\Listeners\ProductSavingListener;
 
 class AppServiceProvider extends ServiceProvider
@@ -28,10 +30,18 @@ class AppServiceProvider extends ServiceProvider
             ['product._fields'],
             ProductFieldsComposer::class
         );
+        View::composer(
+            ['product.attributes'],
+            ProductAttributesComposer::class
+        );
 
         Event::listen(
             ProductSavedEvent::class,
             ProductCategorySavingListener::class
+        );
+        Event::listen(
+            ProductSavedEvent::class,
+            ProductAttributeSavingListener::class
         );
         Event::listen(
             ProductSavedEvent::class,

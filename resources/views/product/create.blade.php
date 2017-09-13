@@ -10,11 +10,8 @@
             @include('product._fields')
             <hr />
             @include('product.images')
-
             <hr />
-            @foreach ($attirbutes as $attribute)
-                {!! Form::text($attribute->identifier, $attribute->name) !!}
-            @endforeach
+            @include('product.attributes')
 
             {!! Form::submit('Create Product') !!}
             {!! Form::button('Cancel',['class' => 'btn', 'onclick' => 'location="'.route('product.index').'"']) !!}

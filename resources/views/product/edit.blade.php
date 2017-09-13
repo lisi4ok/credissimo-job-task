@@ -13,14 +13,8 @@
             @include('product._fields')
             <hr />
             @include('product.images')
-
             <hr />
-            @foreach ($attributes as $attribute)
-                <div class="form-group">
-                    <label for="{{ $attribute->identifier }}">{{ $attribute->name }}</label>
-                    <input type="text" class="form-control" name="{{ $attribute->identifier }}" id="{{ $attribute->identifier }}" placeholder="{{ $attribute->name }}" value="{{ $attribute->value }}">
-                </div>
-            @endforeach
+            @include('product.attributes')
 
             {!! Form::submit('Edit Product') !!}
             {!! Form::button('Cancel',['class' => 'btn', 'onclick' => 'location="'.route('product.index').'"']) !!}

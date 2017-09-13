@@ -6,13 +6,23 @@ class ProductAttributeValue extends Model
 {
 	protected $fillable = ['attribute_id', 'product_id' ,'value'];
 
-    public function products()
+    /**
+     * Attribute Drop down Options belongs to many Product Attribute.
+     *
+     * @return \App\Models\Attribute
+     */
+    public function attribute()
     {
-        return $this->belongsToMany(Product::class);
+        return $this->belongsTo(Attribute::class);
     }
 
-    public function attributes()
+    /**
+     * Attribute Drop down Options belongs to many Product Attribute.
+     *
+     * @return \App\Models\Product
+     */
+    public function products()
     {
-        return $this->belongsToMany(Attribute::class);
+        return $this->hasMany(Product::class);
     }
 }
