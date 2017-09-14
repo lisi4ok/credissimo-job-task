@@ -10,10 +10,14 @@ class Model extends Eloquent
     {
         $model = new static();
         try {
-            $row = call_user_func_array([static::query(), 'findorfail'], [$id, $columns]);
+            $row = call_user_func_array(
+                [static::query(), 'findorfail'],
+                [$id, $columns]
+            );
             return $row;
         } catch (ModelNotFoundException $e) {
-            throw with(new TenantModelNotFoundException())->setModel(get_called_class());
+            throw with(new TenantModelNotFoundException())
+                ->setModel(get_called_class());
         }
     }
 
@@ -23,33 +27,29 @@ class Model extends Eloquent
                                     $page = null)
     {
         $model = new static();
-        $rows = call_user_func_array([static::query(), 'paginate'], [$perPage , $columns, $pageName , $page]);
-
+        $rows = call_user_func_array(
+            [static::query(), 'paginate'],
+            [$perPage , $columns, $pageName , $page]
+        );
         return $rows;
-
     }
 
     public static function create(array $attributes = [])
     {
-
-        $row = call_user_func_array([static::query(), 'create'], [$attributes]);
-
+        $row = call_user_func_array(
+            [static::query(), 'create'],
+            [$attributes]
+        );
         return $row;
     }
-
 
     public function update(array $attributes = [], array $options = [])
     {
         return parent::update($attributes, $options);
     }
 
-
     public function delete()
     {
         return parent::delete();
-    }
-
-    public function forgetCommonQueryCache() {
-
     }
 }

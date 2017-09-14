@@ -14,18 +14,20 @@ class Category extends Model
         return $this->belongsToMany(Product::class);
     }
 
-    public static function getCategoryOptions() {
-
+    public static function getCategoryOptions()
+    {
         $model = new static;
-        $options = Collection::make(['' => 'Please Select'] + $model->all()->pluck('name', 'id')->toArray());
-
+        $options = Collection::make(
+            ['' => 'Please Select'] + $model->all()->pluck('name', 'id')->toArray()
+        );
         return $options;
     }
 
     public function getParentNameAttribute()
     {
-        $parentCategory = $this->where('id', '=', $this->attributes['parent_id'])->get()->first();
-
+        $parentCategory = $this->where(
+            'id', '=', $this->attributes['parent_id']
+        )->get()->first();
         return (null != $parentCategory) ? $parentCategory->name : '';
     }
 
@@ -42,44 +44,25 @@ class Category extends Model
     public function getAllCategories()
     {
         $data = [];
-
         $rootCategories = $this->where('parent_id', '=', '0')->get();
-        $data = $this->list_categories($rootCategories);
-
+        $data = $this->listCategories($rootCategories);
         return $data;
     }
 
-    public function list_categories($categories)
+    public function listCategories($categories)
     {
         $data = [];
-
         foreach ($categories as $category) {
             $data[] = [
                 'object' => $category,
-                'children' => $this->list_categories($category->children),
+                'children' => $this->listCategories($category->children),
             ];
         }
-
         return $data;
     }
 
     public function getChilds($id)
     {
         return $this->where('parent_id', '=', $id)->get();
-    }
-
-
-    public function getFilters()
-    {
-        $attrs = Collection::make([]);
-        $productIds = $this->products->pluck('id');
-
-        $productVarcharCollection = ProductVarcharValue::whereIn('product_id', $productIds)->get()->unique('product_attribute_id');
-
-        foreach ($productVarcharCollection as $varcharValue) {
-            $attrs->push(Attribute::find($varcharValue->product_attribute_id));
-        }
-        return $attrs;
-
     }
 }

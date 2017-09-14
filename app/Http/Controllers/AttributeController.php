@@ -15,11 +15,6 @@ class AttributeController extends Controller
         $this->middleware('auth');
     }
 
-    public function getDataGrid()
-    {
-        return $users = DataGrid::dataTableData(Attribute::query())->get();
-    }
-
     public function index()
     {
         $dataGrid = DataGrid::model(Attribute::query())
@@ -51,7 +46,6 @@ class AttributeController extends Controller
     {
         $attribute = Attribute::create($request->all());
         Event::fire(new AttributeSavedEvent($attribute, $request));
-        //$this->_saveDropdownOptions($attribute , $request);
         return redirect()->route('attribute.index');
     }
 
@@ -66,7 +60,6 @@ class AttributeController extends Controller
         $attribute = Attribute::find($id);
         $attribute->update($request->all());
         Event::fire(new AttributeSavedEvent($attribute, $request));
-        //$this->_saveDropdownOptions($attribute, $request);
         return redirect()->route('attribute.index');
     }
 
@@ -79,20 +72,4 @@ class AttributeController extends Controller
         Attribute::destroy($id);
         return redirect()->route('attribute.index');
     }
-
-    // private function _saveDropdownOptions($attribute, $request)
-    // {
-
-    //     if (null !== $request->get('dropdown-options')) {
-
-    //         foreach ($request->get('dropdown-options') as $key => $val) {
-    //             if ($key == '__RANDOM_STRING__') {
-    //                 continue;
-    //             }
-    //             if (!is_int($key)) {
-    //                 $attribute->attributeDropdownOptions()->create($val);
-    //             }
-    //         }
-    //     }
-    // }
 }

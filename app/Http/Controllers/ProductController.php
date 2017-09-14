@@ -43,7 +43,6 @@ class ProductController extends Controller
                                             >Destroy</a>
                                     </form>";
             });
-
         return view('product.index')->with('dataGrid', $dataGrid);
     }
 
@@ -72,7 +71,6 @@ class ProductController extends Controller
         } catch (\Exception $e) {
             echo 'Error in Saving Product: ', $e->getMessage(), "\n";
         }
-
         return redirect()->route('product.edit', ['id' => $product->id]);
     }
 
@@ -100,7 +98,6 @@ class ProductController extends Controller
     {
         $product = Product::findorfail($id);
         return view('product.edit')->with('product', $product);
-
     }
 
     /**
@@ -116,12 +113,10 @@ class ProductController extends Controller
         try {
             $product = Product::findorfail($id);
             $product->update($request->all());
-
             Event::fire(new ProductSavedEvent($product, $request));
         } catch (\Exception $e) {
             throw new \Exception('Error in Saving Product: ' . $e->getMessage());
         }
-
         return redirect()->route('product.index');
     }
 
@@ -134,12 +129,10 @@ class ProductController extends Controller
      */
     public function destroy($id)
     {
-
         /**
          * @todo  destroy attribute valuesS
          */
         Product::destroy($id);
-
         return redirect()->route('product.index');
     }
 
@@ -148,13 +141,10 @@ class ProductController extends Controller
         $image = $request->file('image');
         $tmpPath = str_split(strtolower(str_random(3)));
         $checkDirectory = '/uploads/catalog/images/' . implode('/', $tmpPath);
-
-        $dbPath = $checkDirectory . DIRECTORY_SEPARATOR . $image->getClientOriginalName();
-
+        $dbPath = $checkDirectory . DIRECTORY_SEPARATOR
+            . $image->getClientOriginalName();
         $image = Image::upload($image, $checkDirectory);
-
         $tmp = $this->_getTmpString();
-
         return view('product.upload-image')
             ->with('image', $image)
             ->with('tmp', $tmp);
@@ -163,11 +153,9 @@ class ProductController extends Controller
     public function deleteImage(Request $request)
     {
         $path = $request->get('path');
-
         if (File::exists($path)) {
             File::delete(public_path() . $path);
         }
-
         return 'success';
     }
 

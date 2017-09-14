@@ -24,23 +24,12 @@ class Product extends Model
     public static function boot()
     {
         parent::boot();
-        // registering a callback
-        // to be executed upon the creation of an activity AR
         static::creating(function($model) {
-
-            // produce a slug based on the activity title
             $slug = Str::slug($model->name);
-
-            // check to see if any other slugs
-            // exist that are the same & count them
             $count = static::whereRaw(
             	"slug RLIKE '^{$slug}(-[0-9]+)?$'"
             )->count();
-
-            // if other slugs exist that are the same,
-            // append the count to the slug
             $model->slug = $count ? "{$slug}-{$count}" : $slug;
-
         });
     }
 
@@ -85,12 +74,9 @@ class Product extends Model
     {
         $defaultPath = "/img/default-product.jpg";
         $image = $this->images()->where('is_main_image','=',1)->first();
-
-
         if (null === $image) {
             return new LocalImageFile($defaultPath);
         }
-
         if ($image->path instanceof LocalImageFile) {
             return $image->path;
         }

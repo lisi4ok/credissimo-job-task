@@ -14,6 +14,7 @@ class AttributeSavingListener
     {
         $attribute = $event->attribute;
         $request = $event->request;
+
         if (null !== $request->get('dropdown-options')) {
             foreach ($request->get('dropdown-options') as $key => $value) {
                 if ($key == '__RANDOM_STRING__') {
