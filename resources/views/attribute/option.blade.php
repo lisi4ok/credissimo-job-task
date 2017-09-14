@@ -6,11 +6,11 @@ if (isset($attribute) && $attribute->attributeDropdownOptions->count() > 0) {
     $randomString = substr(str_shuffle(
         str_repeat('abcdefghijklmnopqrstuvwxyz', 6)
     ), 0, 6);
-    $class = 'hidden';
+    $class = ' hidden';
     $edit = false;
 }
 @endphp
-<div class="dynamic-field {{ $class }}">
+<div class="dynamic-field{{ $class }}">
 	@if($edit === true)
 		@foreach($attribute->attributeDropdownOptions as $dropdownOption)
 		    <div class="dynamic-field-row">
