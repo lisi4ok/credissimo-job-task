@@ -24,7 +24,6 @@
 	               <span class="label label-default m-l-5">In Stock</span>
 	               <hr/>
 	               <h5 class="font-600">Product Description</h5>
-
 	               <p class="text-muted">{!! $product->description !!}</p>
 	               <div class="m-t-30">
 	                   <button type="button" class="btn btn-danger waves-effect waves-light m-l-10">
@@ -54,7 +53,6 @@
 	           </div>
 	       </div>
 	   </div>
-
 	</div> <!-- end card-box/Product detai box -->
 	</div> <!-- end col -->
 </div>

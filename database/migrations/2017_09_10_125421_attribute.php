@@ -26,19 +26,16 @@ class Attribute extends Migration
                 $table->timestamps();
             });
         }
-
         if (!Schema::hasTable('attribute_dropdown_options')) {
             Schema::create('attribute_dropdown_options', function (Blueprint $table) {
                 $table->increments('id');
                 $table->integer('attribute_id')->unsigned();
                 $table->string('display_text');
                 $table->timestamps();
-
                 $table->foreign('attribute_id')
                     ->references('id')->on('attributes')->onDelete('cascade');
             });
         }
-
         if (!Schema::hasTable('product_attribute_values')) {
             Schema::create('product_attribute_values', function (Blueprint $table) {
                 $table->increments('id');
@@ -46,12 +43,10 @@ class Attribute extends Migration
                 $table->integer('product_id')->unsigned();
                 $table->string('value');
                 $table->timestamps();
-
                 $table->foreign('attribute_id')
                     ->references('id')->on('attributes')->onDelete('cascade');
             });
         }
-
     }
 
     /**

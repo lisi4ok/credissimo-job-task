@@ -1,8 +1,8 @@
-{!! Form::file('file','Images',['class' => 'product-image-element form-control','data-token' => csrf_token()]) !!}
-
-
+{!! Form::file('file','Images',[
+    'class' => 'product-image-element form-control',
+    'data-token' => csrf_token()
+]) !!}
 <div class="product-image-list">
-
     @if(isset($product) && count($product->images()->get()->count()) > 0)
         @foreach($product->images()->get() as $image)
             <?php $class = ($image->is_main_image == 1) ? "active" : ""; ?>
@@ -19,12 +19,8 @@
                     @endif
                 </div>
                 <div class="image-info">
-                    <div class="image-title">
-                        XYZ.jpg
-                    </div>
                     <div class="actions">
                         <div class="action-buttons pull-right">
-
                             <button type="button"
                                     class="btn is_main_image_button {{ $class }} selected-icon btn-xs btn-default"
                                     title="Select as Main Image">
@@ -36,14 +32,12 @@
                         </div>
                     </div>
                 </div>
-
             </div>
         @endforeach
     @endif
 </div>
 @push('styles')
 <style>
-
     .image-preview {
         position: relative;
         display: table;
@@ -54,59 +48,42 @@
         float: left;
         text-align: center;
     }
-
     .image-preview .actual-image-thumbnail {
         height: 170px;
     }
-
     .image-preview .image-info .active.selected-icon {
         color: #00dd00;
     }
-
     .image-preview .image-info .image-title {
         margin-bottom: 15px;
     }
-
     .image-preview .image-info {
         position: relative;
         height: 70px;
     }
+    .product-image-list {
+        content: "";
+        display: table;
+        clear: both;
+    }
 </style>
 @endpush
-
 @push('scripts')
 <script>
     jQuery(document).ready(function () {
-
-
         jQuery(document).on('click', '.product-image-list .is_main_image_button', function (e) {
             e.preventDefault();
-            //jQuery(this).toggleClass('active');
-
-            //x = this;
-
-            //var mainImageSrc = jQuery(this).parents('.image-preview:first').find('img').attr('src');
-            //jQuery('.top-header img').attr('src', mainImageSrc);
-
-            //console.info(mainImageSrc);
-
             jQuery('.product-image-list .is_main_image_button').removeClass('active');
             jQuery('.product-image-list .is_main_image_hidden_field').val(0);
-
-
             if (jQuery(this).hasClass('active')) {
-
                 jQuery(this).removeClass('active');
                 jQuery(this).parents('.image-preview:first').find('.is_main_image_hidden_field').val(0);
             } else {
                 jQuery(this).addClass('active');
                 jQuery(this).parents('.image-preview:first').find('.is_main_image_hidden_field').val(1);
             }
-
         });
         jQuery(document).on('click', '.product-image-list .image-preview .destroy-image', function (e) {
-
-
             var token = jQuery('.product-image-element').attr('data-token');
             var path = jQuery(e.target).parents('.image-preview:first').find('.img-tag').attr('src');
             var data = {_token: token, path: path};
@@ -118,41 +95,32 @@
                     if (response == 'success') {
                         jQuery(e.target).parents('.image-preview:first').remove();
                     }
-
                 }
             })
         });
         jQuery('.product-image-element').change(function (e) {
             var files = e.target.files;
-
             if (files.length <= 0) {
                 return;
             }
-
             var formData = new FormData();
-
             formData.append('_token', jQuery(e.target).attr('data-token'));
             for (var i = 0, file; file = files[i]; ++i) {
                 formData.append('image', file);
             }
-
             var xhr = new XMLHttpRequest();
             xhr.open('POST', '{{ URL::to("/product-image/upload") }}', true);
             xhr.onload = function (e) {
                 if (this.status == 200) {
-
                     jQuery('.product-image-list').append(this.response);
                     if (jQuery('.product-image-list .image-preview').length == 1) {
                         jQuery('.product-image-list .image-preview .is_main_image_button').trigger('click');
                     }
                 }
             };
-
             xhr.send(formData);
-
             jQuery(".product-image-element").val('');
         });
-
     });
 </script>
 @endpush

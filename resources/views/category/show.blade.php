@@ -11,7 +11,7 @@
                 <a href="{{ route('product.show', $product->slug) }}">
                     @foreach ($product->images as $image)
                     @if ($image->is_main_image)
-                        <img src="{!! $image->path->smallUrl !!}" alt="Preview image">
+                        <img class="img-responsive" src="{!! $image->path->medUrl !!}" alt="{{ $product->name }}">
                         @php
                             break;
                         @endphp

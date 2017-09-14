@@ -40,16 +40,8 @@ class Product extends Migration
         //     $table->decimal('special_price', 10, 6);
         //     $table->decimal('final_price', 10, 6);
         //     $table->timestamps();
-
         //     $table->foreign('product_id')->references('id')->on('products')->onDelete('cascade');
         // });
-
-        if (!Schema::hasTable('category_product')) {
-            Schema::table('category_product', function (Blueprint $table) {
-                $table->foreign('product_id')->references('id')
-                    ->on('products')->onDelete('cascade');
-            });
-        }
 
         if (!Schema::hasTable('product_images')) {
             Schema::create('product_images', function (Blueprint $table) {
@@ -58,13 +50,17 @@ class Product extends Migration
                 $table->text('path');
                 $table->boolean('is_main_image')->nullable()->default(null);
                 $table->timestamps();
-
                 $table->foreign('product_id')->references('id')
                     ->on('products')->onDelete('cascade');
             });
         }
-
-        if (!Schema::hasTable('product_attribute_values')) {
+        if (Schema::hasTable('category_product')) {
+            Schema::table('category_product', function (Blueprint $table) {
+                $table->foreign('product_id')->references('id')
+                    ->on('products')->onDelete('cascade');
+            });
+        }
+        if (Schema::hasTable('product_attribute_values')) {
             Schema::table('product_attribute_values', function (Blueprint $table) {
                 $table->foreign('product_id')
                     ->references('id')->on('products')->onDelete('cascade');
@@ -82,7 +78,6 @@ class Product extends Migration
         DB::statement('SET FOREIGN_KEY_CHECKS=0;');
         Schema::drop('products');
         Schema::drop('product_images');
-        Schema::drop('category_product');
         DB::statement('SET FOREIGN_KEY_CHECKS=1;');
     }
 }

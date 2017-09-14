@@ -9,12 +9,11 @@
 	        }
 	    @endphp
 	    {!! Form::select('modules[attributes]['.$attribute->identifier.']',
-	                    $attribute->name,
-	                    $attribute->attributeDropdownOptions->pluck('display_text','id'),
-	                    ['value' => $varcharValue,'class' => 'form-control']
+            $attribute->name,
+            $attribute->attributeDropdownOptions->pluck('display_text','id'),
+            ['value' => $varcharValue,'class' => 'form-control']
 	    ) !!}
     @endif
-
     @if($attribute->field_type == "TEXT")
 		@php
             $varcharValue = null;

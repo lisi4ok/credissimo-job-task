@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Sep 13, 2017 at 08:30 AM
+-- Generation Time: Sep 13, 2017 at 11:02 PM
 -- Server version: 5.7.19-log
 -- PHP Version: 7.1.7
 
@@ -46,7 +46,8 @@ CREATE TABLE `attributes` (
 
 INSERT INTO `attributes` (`id`, `name`, `identifier`, `field_type`, `sort_order`, `created_at`, `updated_at`) VALUES
 (1, 'Camera', 'camera', 'TEXT', 1, '2017-09-13 03:40:57', '2017-09-13 03:40:57'),
-(2, 'Weight', 'weight', 'TEXT', 2, '2017-09-13 04:55:24', '2017-09-13 04:55:24');
+(2, 'Weight', 'weight', 'TEXT', 2, '2017-09-13 04:55:24', '2017-09-13 04:55:24'),
+(3, 'Dimensions', 'dimensions', 'TEXT', 3, '2017-09-13 19:36:41', '2017-09-13 19:36:41');
 
 -- --------------------------------------------------------
 
@@ -198,10 +199,12 @@ CREATE TABLE `product_attribute_values` (
 --
 
 INSERT INTO `product_attribute_values` (`id`, `attribute_id`, `product_id`, `value`, `created_at`, `updated_at`) VALUES
-(1, 1, 1, '12MBPX', NULL, NULL),
-(2, 2, 1, '100g', NULL, NULL),
 (3, 1, 2, '16MBPX', NULL, NULL),
-(4, 2, 2, '100g', NULL, NULL);
+(7, 1, 1, '12MBPX', '2017-09-13 19:30:27', '2017-09-13 19:30:27'),
+(8, 2, 1, '153', '2017-09-13 19:30:27', '2017-09-13 19:38:39'),
+(9, 3, 1, '158.20 x 77.90 x 7.30', '2017-09-13 19:38:39', '2017-09-13 19:38:39'),
+(10, 2, 2, '146', '2017-09-13 19:38:46', '2017-09-13 19:38:46'),
+(11, 3, 2, '158.20 x 77.90 x 7.30', '2017-09-13 19:38:46', '2017-09-13 19:38:46');
 
 -- --------------------------------------------------------
 
@@ -331,7 +334,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `attributes`
 --
 ALTER TABLE `attributes`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 --
 -- AUTO_INCREMENT for table `attribute_dropdown_options`
 --
@@ -361,7 +364,7 @@ ALTER TABLE `products`
 -- AUTO_INCREMENT for table `product_attribute_values`
 --
 ALTER TABLE `product_attribute_values`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 --
 -- AUTO_INCREMENT for table `product_images`
 --

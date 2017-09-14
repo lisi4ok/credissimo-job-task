@@ -22,14 +22,12 @@ class Category extends Migration
                 $table->timestamps();
             });
         }
-
         if (!Schema::hasTable('category_product')) {
             Schema::create('category_product', function (Blueprint $table) {
                 $table->increments('id');
                 $table->integer('category_id')->unsigned();
                 $table->integer('product_id')->unsigned();
                 $table->timestamps();
-
                 $table->foreign('category_id')->references('id')->on('categories')->onDelete('cascade');
             });
         }

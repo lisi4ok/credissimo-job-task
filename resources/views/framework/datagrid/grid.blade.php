@@ -25,7 +25,6 @@
             </th>
         @endforeach
     </tr>
-
     @foreach($dataGrid->data as $row)
         <tr>
             @foreach($dataGrid->columns as $column)
@@ -41,5 +40,4 @@
         </tr>
     @endforeach
 </table>
-
 {!! $dataGrid->data->appends(Request::except('page'))->render('pagination::bootstrap-4') !!}
