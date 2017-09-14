@@ -30,7 +30,6 @@
             @endphp
             @if (count($category['children']))
                 <ul class="dropdown-menu multi-level" role="menu">
-                {{ $level }}
                     @include('layouts.category-tree', [
                         'categories' => $category['children'],
                         'level' => $level,
