@@ -6,7 +6,7 @@
         <div class="panel-heading"><h1>Edit Product Attribute</h1></div>
         <div class="panel-body">
             {!! Form::bind($attribute, ['method' => 'PUT', 'action' => route('attribute.update', $attribute->id)]) !!}
-            @include('attribute._fields')
+            @include('attribute.fields')
             {!! Form::submit('Update Attribute') !!}
             {!! Form::button('Cancel',['class' => 'btn', 'onclick' => 'location="'.route('attribute.index').'"']) !!}
             {!! Form::close() !!}

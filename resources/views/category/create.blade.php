@@ -6,7 +6,7 @@
         <div class="panel-heading"><h1>Create Category</h1></div>
         <div class="panel-body">
             {!! Form::open(['method' => 'post', 'action' => route('category.store')]) !!}
-                @include('category._fields')
+                @include('category.fields')
                 {!! Form::submit('Create Category',['disabled' => true, 'class' => 'btn category-save-button']) !!}
                     <a href="{{ route('category.index') }}" class="btn ">Cancel</a>
             {!! Form::close() !!}

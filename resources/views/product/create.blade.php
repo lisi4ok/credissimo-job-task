@@ -6,7 +6,7 @@
         <div class="panel-heading"><h1>Create Product</h1></div>
         <div class="panel-body">
         {!! Form::open(['files' => true,'action' => route('product.store'),'method' => 'post','id' => 'product-save-form']) !!}
-        @include('product._fields')
+        @include('product.fields')
         <hr />
         @include('product.images')
         <hr />

@@ -10,7 +10,7 @@
                 $productCategories = $product->categories()
                 ->get()->pluck('id')->toArray();
             @endphp
-            @include('product._fields')
+            @include('product.fields')
             <hr />
             @include('product.images')
             <hr />

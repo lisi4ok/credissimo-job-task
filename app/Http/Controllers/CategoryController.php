@@ -3,10 +3,10 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Framework\DataGrid\Facades\DataGrid;
 use App\Http\Requests\CategoryRequest;
 use App\Models\Category;
 use App\Models\Product;
-use App\Framework\DataGrid\Facades\DataGrid;
 
 class CategoryController extends Controller
 {
@@ -118,6 +118,7 @@ class CategoryController extends Controller
             ->with('params', $request->all())
             ->with('products', $products);
     }
+
     /**
      * Remove the specified resource from storage.
      *

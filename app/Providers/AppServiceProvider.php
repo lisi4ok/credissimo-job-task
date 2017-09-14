@@ -5,9 +5,14 @@ namespace App\Providers;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\Facades\Event;
+
 use App\ViewComposers\CategoryFieldsComposer;
 use App\ViewComposers\ProductFieldsComposer;
 use App\ViewComposers\ProductAttributesComposer;
+
+use App\Events\AttributeSavedEvent;
+use App\Listeners\AttributeSavingListener;
+
 use App\Events\ProductSavedEvent;
 use App\Listeners\ProductCategorySavingListener;
 use App\Listeners\ProductAttributeSavingListener;
@@ -23,11 +28,11 @@ class AppServiceProvider extends ServiceProvider
     public function boot()
     {
         View::composer(
-            ['category._fields'],
+            ['category.fields'],
             CategoryFieldsComposer::class
         );
         View::composer(
-            ['product._fields'],
+            ['product.fields'],
             ProductFieldsComposer::class
         );
         View::composer(
@@ -35,6 +40,10 @@ class AppServiceProvider extends ServiceProvider
             ProductAttributesComposer::class
         );
 
+        Event::listen(
+            AttributeSavedEvent::class,
+            AttributeSavingListener::class
+        );
         Event::listen(
             ProductSavedEvent::class,
             ProductCategorySavingListener::class
@@ -56,6 +65,5 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        //
     }
 }

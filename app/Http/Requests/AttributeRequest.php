@@ -25,29 +25,21 @@ class AttributeRequest extends Request
         $validationRule = [];
         $validationRule['name'] = 'required|max:255';
         $validationRule['field_type'] = 'required';
-        $validationRule['sort_order'] = 'required|integer';
-
-
+        $validationRule['sort_order'] = 'integer|nullable';
         if (null !== $this->request->get('dropdown-options')) {
-
             foreach ($this->request->get('dropdown-options') as $key => $val) {
                 if ($key == "__RANDOM_STRING__") {
                     continue;
                 }
                 $validationRule['dropdown-options.' . $key . ".display_text"] = 'required';
-
             }
         }
-
-
         if ($this->getMethod() == 'POST') {
             $validationRule['identifier'] = 'required|max:255|alpha_dash|unique:attributes';
         }
         if ($this->getMethod() == 'PUT') {
             $validationRule['identifier'] = 'required|max:255|alpha_dash';
         }
-
-        //dd($validationRule);
         return $validationRule;
     }
 }

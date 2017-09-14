@@ -7,6 +7,10 @@ Auth::routes();
 
 Route::resource('/category', 'CategoryController');
 Route::resource('/attribute', 'AttributeController');
+Route::post('/attribute-option/add', [
+    'as' => 'attribute.add-option', 'uses' => 'AttributeController@addOption',
+]);
+
 
 Route::resource('/product', 'ProductController');
 Route::post('/product-image/upload', [

@@ -15,8 +15,6 @@ class ProductSavingListener
     {
         $product = $event->product;
         $request = $event->request;
-
-        //*** PRODUCT IMAGE SAVING***//
         if (null !== $request->get('image')) {
             $exitingIds = $product->images()->get()->pluck('id')->toArray();
             foreach ($request->get('image') as $key => $data) {

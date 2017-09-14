@@ -6,7 +6,7 @@
         <div class="panel-heading"><h1>Create Product Attribute</h1></div>
         <div class="panel-body">
             {!! Form::open(['method' => 'post','action' => route('attribute.store')]) !!}
-            @include('attribute._fields')
+            @include('attribute.fields')
             {!! Form::submit('Create Attribute') !!}
             {!! Form::button('Cancel',['class' => 'btn', 'onclick' => 'location="'.route('attribute.index').'"']) !!}
             {!! Form::close() !!}

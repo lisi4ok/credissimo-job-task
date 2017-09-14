@@ -4,25 +4,25 @@ namespace App\Events;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Broadcasting\InteractsWithSockets;
-use App\Models\Product;
-use App\Http\Requests\ProductRequest;
+use App\Models\Attribute;
+use App\Http\Requests\AttributeRequest;
 
-class ProductSavedEvent
+class AttributeSavedEvent
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
-    public $product = null;
+    public $attribute = null;
     public $request = null;
 
     /**
      * Create a new event instance.
      *
-     * @param \App\Models\Product $product
-     * @param \App\Http\Requests\ProductRequest $request
+     * @param \App\Models\Attribute $attribute
+     * @param \App\Http\Requests\AttributeRequest $request
      */
-    public function __construct(Product $product, ProductRequest $request)
+    public function __construct(Attribute $attribute, AttributeRequest $request)
     {
-        $this->product = $product;
+        $this->attribute = $attribute;
         $this->request = $request;
     }
 }
