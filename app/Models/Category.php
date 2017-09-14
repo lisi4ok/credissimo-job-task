@@ -44,7 +44,7 @@ class Category extends Model
     public function getAllCategories()
     {
         $data = [];
-        $rootCategories = $this->where('parent_id', '=', '0')->get();
+        $rootCategories = $this->where('parent_id', '=', null)->get();
         $data = $this->listCategories($rootCategories);
         return $data;
     }

@@ -39,19 +39,9 @@
                 <div class="collapse navbar-collapse" id="app-navbar-collapse">
                     <ul class="nav navbar-nav">
                         @if (Auth::guest())
-                            @php
-                            /**
-                             * @todo  List Childs
-                             */
-                            $categories = \App\Models\Category::where('parent_id', null)->get();
-                            @endphp
-                            @foreach ($categories as $category)
-                                <li>
-                                    <a href="{{ route('category.show', $category->slug) }}">
-                                        {{ $category->name }}
-                                    </a>
-                                </li>
-                            @endforeach
+                            @include('layouts.category-tree', [
+                                'categories' => $categories
+                            ])
                         @else
                             <li><a href="{{ route('category.index') }}">Categories</a></li>
                             <li><a href="{{ route('product.index') }}">Products</a></li>
