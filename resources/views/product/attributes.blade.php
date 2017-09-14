@@ -3,9 +3,8 @@
 	    @php
 	        $varcharValue = null;
 	        if (isset($product) && $product->id > 0) {
-
-	            $productVarcharValue = $attribute->productVarcharValues()->where('product_id', '=', $product->id)->first();
-	            $varcharValue = (isset($productVarcharValue->value)) ? $productVarcharValue->value : NULL;
+	            $productAttributeValues = $attribute->productAttributeValues()->where('product_id', '=', $product->id)->first();
+	            $varcharValue = (isset($productAttributeValues->value)) ? $productAttributeValues->value : NULL;
 	        }
 	    @endphp
 	    {!! Form::select('modules[attributes]['.$attribute->identifier.']',
