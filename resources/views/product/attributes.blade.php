@@ -1,5 +1,5 @@
 @foreach($attributes as $attribute)
-    @if($attribute->field_type == "SELECT")
+    @if($attribute->field_type == 'SELECT')
 	    @php
 	        $varcharValue = null;
 	        if (isset($product) && $product->id > 0) {
@@ -10,10 +10,10 @@
 	    {!! Form::select('modules[attributes]['.$attribute->identifier.']',
             $attribute->name,
             $attribute->attributeDropdownOptions->pluck('display_text','id'),
-            ['value' => $varcharValue,'class' => 'form-control']
+            ['value' => $varcharValue, 'class' => 'form-control']
 	    ) !!}
     @endif
-    @if($attribute->field_type == "TEXT")
+    @if($attribute->field_type == 'TEXT')
 		@php
             $varcharValue = null;
             if (isset($product) && $product->id > 0) {
