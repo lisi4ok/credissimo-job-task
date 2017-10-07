@@ -1,4 +1,4 @@
-Laravel Ecomerce Application
+Laravel Ecommerce Application
 ==============
 ## Installation
 Run the following commands:
