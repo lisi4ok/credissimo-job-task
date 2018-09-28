@@ -3,7 +3,7 @@ Laravel Ecommerce Application
 ## Installation
 Run the following commands:
 ```
-git clone https://github.com/lisi4ok/credissimo-job-task __DIR__
+git clone https://github.com/lisi4ok/laravel-ecommerce-app __DIR__
 ```
 ```
 cd __DIR__
